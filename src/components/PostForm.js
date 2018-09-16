@@ -16,11 +16,25 @@ export default class PostForm extends Component {
     })
   }
 
+  onSubmit = (e) => {
+    e.preventDefault()
+
+    const post = {
+      title: this.state.title,
+      body: this.state.body,
+    }
+
+    axios
+      .post('https://jsonplaceholder.typicode.com/posts', post)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <div>
         <h1>Add Post</h1>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div>
             <label>Title: </label><br />
             <input
